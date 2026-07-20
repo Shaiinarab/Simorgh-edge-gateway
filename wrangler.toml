@@ -1,0 +1,19 @@
+name = "simorgh-edge-gateway"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+# فعال‌سازی هوش مصنوعی بومی کلاودفلر
+[ai]
+binding = "AI"
+
+# اتصال Durable Object برای SQLite
+[[durable_objects.bindings]]
+name = "DATA_TRUST_VAULT"
+class_name = "DataTrustVault"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["DataTrustVault"]
+
+[dev]
+port = 8787
