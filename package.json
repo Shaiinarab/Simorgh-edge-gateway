@@ -1,19 +1,22 @@
 {
   "name": "simorgh-gateway",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Free-to-run, no-KYC, self-evolving agentic AI gateway on the Cloudflare edge.",
+  "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsgo --noEmit",
+    "dev": "wrangler dev",
+    "check": "tsgo --noEmit && wrangler deploy --dry-run",
+    "deploy": "tsgo --noEmit && wrangler deploy"
   },
   "keywords": [],
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "hono": "^4.12.31"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260719.1",
-    "@typescript/native-preview": "^7.0.0-dev.20260707.2",
+    "@typescript/native-preview": "7.0.0-dev.20260707.2",
     "wrangler": "^4.112.0"
   },
   "allowScripts": {
