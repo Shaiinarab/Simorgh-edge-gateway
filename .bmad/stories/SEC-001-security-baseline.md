@@ -1,11 +1,13 @@
 ---
 id: SEC-001
 title: Establish a non-deploying security and CI baseline
-status: in-progress
+status: done
 priority: P1
 owner: Engineering
 scope: Simorgh-edge-gateway
 created: 2026-08-14
+completed: 2026-08-14
+implementation_commit: 5170b57387ea43a2b945464485b1a4b107825bc6
 ---
 
 # SEC-001: Establish a non-deploying security and CI baseline
@@ -45,7 +47,7 @@ All acceptance criteria pass locally and in GitHub Actions, with the final commi
 
 ## Deferred findings
 
-- Restore or locate the shared BMad workspace and its sprint ledger before claiming a complete BMad Loop preflight.
+- **Blocked: shared sprint ledger.** The expected workspace (`/home/ubuntu/github_bmad_workspace`) and its `sprint-status.yaml` are absent from this environment. This story is complete in-repository, but the shared ledger cannot be updated or treated as current until the workspace is restored or supplied.
 - Decide whether to enable Dependabot alerts after confirming notification ownership and repository-security policy.
 - Create a threat-model story for API access control, CORS policy, rate limits, and public retrieval of context or user-log routes.
 
@@ -58,6 +60,7 @@ All acceptance criteria pass locally and in GitHub Actions, with the final commi
 | Strict TypeScript check | Passed | `npm run typecheck` completed successfully. |
 | Worker build dry-run | Passed | `npm run check` completed successfully with `wrangler deploy --dry-run`; no Worker was deployed. |
 | Diff whitespace check | Passed | `git diff --check` reported no errors. |
+| GitHub Actions security baseline | Passed | [Run 31821680796](https://github.com/Shaiinarab/Simorgh-edge-gateway/actions/runs/31821680796) completed successfully for commit `5170b57`. |
 
 ## Residual risk
 
@@ -65,4 +68,4 @@ All acceptance criteria pass locally and in GitHub Actions, with the final commi
 
 ## Handoff
 
-The next action is an independent diff and secret-exposure review, followed by a small commit, push, and GitHub Actions verification if that review passes.
+SEC-001 is complete. Its final documentation update will be committed and pushed, then the same read-only CI workflow will be verified once more. The recommended next engineering loop is to resolve the remaining high-severity development-toolchain advisories through a version-compatibility investigation rather than an unreviewed alpha upgrade.
