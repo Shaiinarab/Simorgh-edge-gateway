@@ -129,8 +129,12 @@ The Intent Shield rejects any tool not in the allow-list, both **before** the lo
 ## 4. Getting Started
 
 ```bash
-# install
-npm install
+# install the exact locked dependency graph
+npm ci
+
+# security baseline — production audit, strict typecheck, and Worker dry-run only
+npm run security:check
+npm run check
 
 # typecheck — TypeScript 7 (tsgo, the native Go port)
 npm run typecheck        # tsgo --noEmit
@@ -149,6 +153,10 @@ npx wrangler secret put HF_TOKEN
 ```
 
 Then open `…workers.dev/dashboard`, exhaust Groq's quota, and **watch the flock reroute to Homā** in real time.
+
+### Security baseline
+
+The default branch runs a read-only GitHub Actions workflow for locked dependency installation, a production-dependency audit, strict type-checking, and a Worker dry-run. These checks do **not** deploy the Worker, activate credentials, or configure scheduled automation. See [SECURITY.md](SECURITY.md) for responsible disclosure guidance and the explicit limits of this baseline.
 
 ---
 
@@ -189,7 +197,7 @@ each milestone leaving an artifact under [`.bmad/phases/`](.bmad/phases). Planni
 ---
 
 ## 7. Known Notes
-- `package.json` declares `"type": "commonjs"` while the Worker is ESM — harmless (the bundler handles it), flagged for cleanup.
+- The project uses ESM (`"type": "module"`) and strict TypeScript validation before local dry-runs or deployment.
 - Extra birds are strictly optional; the flock always has Homā, so **no configuration is ever required to run**.
 
 ---

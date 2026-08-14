@@ -6,13 +6,14 @@
   "scripts": {
     "typecheck": "tsgo --noEmit",
     "dev": "wrangler dev",
+    "security:check": "npm audit --omit=dev --audit-level=high",
     "check": "tsgo --noEmit && wrangler deploy --dry-run",
     "deploy": "tsgo --noEmit && wrangler deploy"
   },
   "keywords": [],
   "type": "module",
   "dependencies": {
-    "hono": "^4.12.31"
+    "hono": "^4.13.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260719.1",
